@@ -9,7 +9,7 @@ public class MouseController : MonoBehaviour, IShip
     public GameObject ship;
     public float smooth;
     public Animator animator;
-
+    private bool isDead;
     private Vector3 destination;
 
     #region unity
@@ -48,6 +48,12 @@ public class MouseController : MonoBehaviour, IShip
 
                 shipCommand.MoveCommand(new Vector2D(destination));
             }
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isDead = !isDead;
+            animator.SetBool("DEATH", isDead);
+
         }
         else
         {
