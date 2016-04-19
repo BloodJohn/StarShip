@@ -10,6 +10,8 @@ public class MouseController : MonoBehaviour, IShip
     public float smooth;
     public Animator animator;
     private bool isDead;
+    private bool isHyperJump;
+    private bool isLanding;
     private Vector3 destination;
 
     #region unity
@@ -55,15 +57,29 @@ public class MouseController : MonoBehaviour, IShip
             animator.SetBool("DEATH", isDead);
 
         }
+        else if (Input.GetKeyDown(KeyCode.Return))
+        {
+            isHyperJump = !isHyperJump;
+            animator.SetBool("HJUMP", isHyperJump);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            isLanding = !isLanding;
+            animator.SetBool("LANDING", isLanding);
+
+        }
+        else if (isHyperJump)
+        {
+            JumpUdate();
+        }
+        else if (isLanding)
+        {
+            LandingUdate();
+        }
         else
         {
-            CompleteUpdating();
-            transform.position = shipCommand.UpdateCurPosition(LastUpdate).Vector3;
-            ship.transform.localRotation = Quaternion.LookRotation(shipCommand.curHead.Vector3);
-
-            animator.SetBool("FWD", shipCommand.isFlyMode);
-            animator.SetBool("LH", shipCommand.dirRotate == 1);
-            animator.SetBool("RH", shipCommand.dirRotate == -1);
+            MoveUpdate();
         }
     }
     #endregion
@@ -89,9 +105,36 @@ public class MouseController : MonoBehaviour, IShip
         return true;
     }
 
-    private Vector3 From(Vector3 source)
+    private void MoveUpdate()
     {
-        return source/10f;
+        ship.transform.localPosition = Vector3.zero;
+
+        CompleteUpdating();
+        transform.position = shipCommand.UpdateCurPosition(LastUpdate).Vector3;
+        ship.transform.localRotation = Quaternion.LookRotation(shipCommand.curHead.Vector3);
+
+        animator.SetBool("FWD", shipCommand.isFlyMode);
+        animator.SetBool("LH", shipCommand.dirRotate == 1);
+        animator.SetBool("RH", shipCommand.dirRotate == -1);
     }
+
+    private void JumpUdate()
+    {
+        Vector3 pos = ship.transform.localPosition;
+
+        pos += shipCommand.curHead.Vector3 * Time.deltaTime * 100;
+
+        ship.transform.localPosition = pos;
+    }
+
+    private void LandingUdate()
+    {
+        Vector3 pos = ship.transform.localPosition;
+
+        pos += Vector3.down * Time.deltaTime;
+
+        ship.transform.localPosition = pos;
+    }
+
     #endregion
 }
