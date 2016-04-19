@@ -274,54 +274,6 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Fly0
-      takeName: Take 001
-      firstFrame: 22
-      lastFrame: 22
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Dummybody
-        weight: 1
-      - path: Dummybody/Dummyframe
-        weight: 1
-      - path: Dummybody/Dummyframe/base
-        weight: 1
-      - path: Dummybody/Dummyframe/Dummytail
-        weight: 1
-      - path: Dummybody/Dummyframe/Dummytail/base_tail
-        weight: 1
-      - path: Dummybody/Dummyframe/DummywingLT
-        weight: 1
-      - path: Dummybody/Dummyframe/DummywingLT/base_wingleft
-        weight: 1
-      - path: Dummybody/Dummyframe/DummywingRT
-        weight: 1
-      - path: Dummybody/Dummyframe/DummywingRT/base_wingright
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
