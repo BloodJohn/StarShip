@@ -7,12 +7,14 @@ public class MouseController : MonoBehaviour, IShip
     public Collider ground;
     public GameObject marker;
     public GameObject ship;
-    public float smooth;
     public Animator animator;
     private bool isDead;
     private bool isHyperJump;
     private bool isLanding;
     private Vector3 destination;
+    public GameObject emitterFly;
+    public GameObject emitterDead;
+    public GameObject emitterHyperJump;
 
     #region unity
 
@@ -29,6 +31,8 @@ public class MouseController : MonoBehaviour, IShip
         destination = transform.position;
         shipCommand.SetPos(new Vector2D(transform.position));
         animator = ship.GetComponentInChildren<Animator>();
+        emitterDead.SetActive(isDead);
+        emitterHyperJump.SetActive(isDead);
     }
 
     // Update is called once per frame
@@ -55,12 +59,14 @@ public class MouseController : MonoBehaviour, IShip
         {
             isDead = !isDead;
             animator.SetBool("DEATH", isDead);
+            emitterDead.SetActive(isDead);
 
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
             isHyperJump = !isHyperJump;
             animator.SetBool("HJUMP", isHyperJump);
+            emitterHyperJump.SetActive(isHyperJump);
 
         }
         else if (Input.GetKeyDown(KeyCode.Backspace))
@@ -116,6 +122,7 @@ public class MouseController : MonoBehaviour, IShip
         animator.SetBool("FWD", shipCommand.isFlyMode);
         animator.SetBool("LH", shipCommand.dirRotate == 1);
         animator.SetBool("RH", shipCommand.dirRotate == -1);
+        emitterFly.SetActive(shipCommand.isFlyMode);
     }
 
     private void JumpUdate()
